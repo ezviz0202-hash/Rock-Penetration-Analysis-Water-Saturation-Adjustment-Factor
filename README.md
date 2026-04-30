@@ -101,7 +101,7 @@ rock-penetration-analysis/
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/rock-penetration-analysis.git
+git clone (https://github.com/ezviz0202-hash/Rock-Penetration-Analysis-Water-Saturation-Adjustment-Factor)
 cd rock-penetration-analysis
 pip install -r requirements.txt
 python run_analysis.py
