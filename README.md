@@ -76,6 +76,8 @@ At full saturation (`Sw = 1.0`), the fitted adjustment factor indicates an appro
 
 One-way ANOVA confirms that water saturation has a statistically significant effect on all penetration indicators for both rock types.
 
+Significance levels shown in the figure are defined as: `*` p<0.05, `**` p<0.01, `***` p<0.001. Here, a larger F-statistic indicates a stronger difference among water-saturation groups for the corresponding penetration indicator.
+
 ![ANOVA Summary](figures/fig6_anova_summary.png)
 
 ---
