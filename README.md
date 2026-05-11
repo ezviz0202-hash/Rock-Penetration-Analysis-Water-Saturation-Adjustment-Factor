@@ -1,6 +1,8 @@
 # Rock Penetration Analysis — Water-Saturation Adjustment Factor
 
-An experimental-data-driven framework to quantify the influence of **water saturation** on rock drill bit penetration performance, and to derive an interpretable **adjustment factor** suitable for field ROP (Rate of Penetration) prediction.
+A preliminary synthetic-data-based analysis prototype to explore the possible influence of **water saturation** on rock drill bit penetration performance, and to derive an interpretable **adjustment factor** suitable for future field ROP (Rate of Penetration) prediction.
+
+**Note:** This project currently uses synthetic demonstration data generated from physically motivated assumptions. The present results should not be interpreted as experimentally validated findings.
 
 ---
 
@@ -9,14 +11,16 @@ An experimental-data-driven framework to quantify the influence of **water satur
 In real field operations, water saturation levels in rocks vary significantly due to groundwater or rainfall. This directly affects excavation efficiency, specific energy consumption, and bit wear. While the effects of water saturation on static mechanical properties (compression, tension) are well established, their application to **dynamic percussion drilling** remains limited.
 
 This project builds a reproducible analysis pipeline that:
-1. Processes force–time curves from percussion drilling experiments
+1. Processes force–time curves from percussion drilling data
 2. Extracts key penetration indicators
 3. Performs statistical significance testing
 4. Fits a simple, physically interpretable water-saturation adjustment factor
 
 ---
 
-## Results
+## Prototype Demonstration Results
+
+The following results are based on synthetic demonstration data. They are intended to show the structure of the analysis pipeline rather than to claim experimentally validated conclusions.
 
 ### Force–Time Curves
 
@@ -28,7 +32,7 @@ Filtered force–time responses under varying water saturation levels for both r
 
 ### Penetration Depth vs Water Saturation
 
-As water saturation increases, penetration depth increases due to reduced rock resistance, with the effect more pronounced for tuff than andesite.
+In the synthetic demonstration dataset, penetration depth was modeled to increase with water saturation due to reduced rock resistance, with the effect more pronounced for tuff than andesite.
 
 ![Penetration Depth](figures/fig2_penetration_depth.png)
 
@@ -36,7 +40,7 @@ As water saturation increases, penetration depth increases due to reduced rock r
 
 ### Specific Energy vs Water Saturation
 
-Specific energy decreases with saturation, indicating that less energy is required to penetrate saturated rock.
+In the synthetic demonstration dataset, specific energy was modeled to decrease with saturation, indicating that less energy may be required to penetrate saturated rock.
 
 ![Specific Energy](figures/fig3_specific_energy.png)
 
@@ -44,7 +48,7 @@ Specific energy decreases with saturation, indicating that less energy is requir
 
 ### Correlation Analysis
 
-Correlation matrices reveal the strength of relationships between water saturation, impact energy, and penetration performance indicators.
+Correlation matrices reveal the modeled relationships between water saturation, impact energy, and penetration performance indicators in the synthetic demonstration dataset.
 
 ![Correlation Heatmap](figures/fig4_correlation_heatmap.png)
 
@@ -52,7 +56,7 @@ Correlation matrices reveal the strength of relationships between water saturati
 
 ### Adjustment Factor f(Sw) — Model Fitting
 
-Four models are fitted. The best-performing model (highest R²) is highlighted.
+Four models are fitted to the synthetic demonstration data. The best-performing model (highest R²) is highlighted.
 
 | Rock | Best Model | R² |
 |---|---|---|
@@ -66,7 +70,7 @@ Andesite: f(Sw) = 1 + 0.2862 × Sw^1.3674
 Tuff:     f(Sw) = 1 + 0.2636 × Sw + 0.3922 × Sw²
 ```
 
-At full saturation (`Sw = 1.0`), the fitted adjustment factor indicates an approximate ROP increase of 28.6% for andesite and 65.6% for tuff relative to dry conditions.
+At full saturation (`Sw = 1.0`), the fitted adjustment factor in the synthetic demonstration dataset indicates an approximate ROP increase of 28.6% for andesite and 65.6% for tuff relative to dry conditions.
 
 ![Adjustment Factor](figures/fig5_adjustment_factor.png)
 
@@ -74,7 +78,7 @@ At full saturation (`Sw = 1.0`), the fitted adjustment factor indicates an appro
 
 ### ANOVA Results
 
-One-way ANOVA confirms that water saturation has a statistically significant effect on all penetration indicators for both rock types.
+One-way ANOVA on the synthetic demonstration dataset indicates statistically significant differences among modeled water-saturation groups for all penetration indicators for both rock types.
 
 Significance levels shown in the figure are defined as: `*` p<0.05, `**` p<0.01, `***` p<0.001. Here, a larger F-statistic indicates a stronger difference among water-saturation groups for the corresponding penetration indicator.
 
@@ -89,7 +93,7 @@ rock-penetration-analysis/
 ├── run_analysis.py           # Main entry point
 ├── requirements.txt
 ├── data/
-│   └── experimental_data.csv # Generated dataset
+│   └── experimental_data.csv # Generated synthetic demonstration dataset
 ├── src/
 │   ├── data_generator.py     # Synthetic data with physical basis
 │   ├── signal_processing.py  # Force-time curve processing
@@ -115,7 +119,7 @@ python run_analysis.py
 
 ### 1. Force–Time Curve Processing
 
-Raw percussion force signals are filtered using a 4th-order Butterworth low-pass filter (cutoff: 2 kHz) to remove high-frequency noise while preserving impact dynamics. Peak detection and impulse integration are then applied.
+Synthetic percussion force signals are filtered using a 4th-order Butterworth low-pass filter (cutoff: 2 kHz) to remove high-frequency noise while preserving impact dynamics. Peak detection and impulse integration are then applied.
 
 ### 2. Indicator Extraction
 
